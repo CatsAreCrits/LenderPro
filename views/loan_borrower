@@ -17,7 +17,7 @@
 $(function() {
       $("#{{item[0]}}_b").click( function()
            {
-             $( "#loan_info" ).load( "http://catsarecrits.com:8080/loans/id/{{item[0]}}");
+             $( "#loan_info" ).load( "/loans/id/{{item[0]}}");
            }
       );
 });

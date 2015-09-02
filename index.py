@@ -121,7 +121,7 @@ l = LoanTracker()
 
 @route('/')
 def index():
-	return template('index', **main_dict)
+	return template('index')
 
 @route('/loans')
 def loanForm():
@@ -216,5 +216,5 @@ def viewPaymentsbyLoanID(id):
 	return template('loan_payments', **payment_data)
 
 if __name__ == '__main__':
-	port = int(os.environ.get('PORT', 8080))
+	port = int(os.environ.get('PORT', 2323))
 	run(host='0.0.0.0', port=port, debug=True, server='cherrypy')

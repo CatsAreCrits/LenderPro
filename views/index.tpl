@@ -74,11 +74,11 @@
 $(function() {
       $("#add_loan").click( function()
            {
-             $( "#loan_info" ).load( "http://localhost:8080/loans");
+             $( "#loan_info" ).load( "/loans");
            }
       );
 });
  </script>
-        <script>$( "#status_open" ).load( "http://localhost:8080/loans/status/open" );</script>
-        <script>$( "#status_closed" ).load( "http://localhost:8080/loans/status/closed" );</script>
+        <script>$( "#status_open" ).load( "/loans/status/open" );</script>
+        <script>$( "#status_closed" ).load( "/loans/status/closed" );</script>
     </html>

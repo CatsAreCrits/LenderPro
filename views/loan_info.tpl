@@ -25,7 +25,7 @@
     </div>
     <div id="payment_table">
     </div>
-    <script>$( "#payment_table" ).load( "http://localhost:8080/loans/payments/{{id}}" );
+    <script>$( "#payment_table" ).load( "/loans/payments/{{id}}" );
     $(document).ready(function() {
     $('#status').editable();
     });</script>

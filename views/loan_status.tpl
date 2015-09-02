@@ -18,8 +18,8 @@
 $(function() {
       $("#{{item[0]}}").click( function()
            {
-             $( "#loan_info" ).load( "http://localhost:8080/loans/id/{{item[0]}}");
-             $( "#borrower_loans" ).load( "http://localhost:8080/loans/borrower/{{item[1]}}");
+             $( "#loan_info" ).load( "/loans/id/{{item[0]}}");
+             $( "#borrower_loans" ).load( "/loans/borrower/{{item[1]}}");
            }
       );
 });
