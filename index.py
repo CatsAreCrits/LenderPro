@@ -11,7 +11,7 @@ import os
 import datetime
 import sqlite3 as lite
 import sys
-from bottle import route, run, template, request
+from bottle import route, run, template, request, static_file
 
 # Loan Tracker
 # By Cody Morton
@@ -118,6 +118,9 @@ class LoanTracker:
 l = LoanTracker()
 
 # Run the site
+@route('/static/<filename>')
+def server_static(filename):
+	return static_file(filename, root='/root/lenderpro/files')
 
 @route('/')
 def index():

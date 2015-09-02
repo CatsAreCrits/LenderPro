@@ -1,0 +1,216 @@
+/*
+Created on 2/2/2015 by Cody Morton http://codymorton.us & http://catsarecrits.com
+*/
+html {
+	font-family: Ubuntu, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1em;
+	margin: 0px;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  margin: 0px;
+  background: url(/static/bg.png);
+  height: 100%;
+}
+hr {
+  margin: 10px 0 10px 0;
+}
+/*Header*/
+.header {
+  display: flex;
+}
+.navbar {
+  margin: 0;
+  border-radius: 0;
+  flex: 1;
+}
+.navbar.navbar-inverse {
+  background-color: rgba(66, 94, 127, 0.5);
+}
+#time {
+  font-weight: 900;
+  font-size: 24px;
+  display: block;
+  line-height: 20px;
+}
+/*http://puu.sh/iNKJv/dfdcf3882d.png*/
+.well {
+  border-radius: 0;
+  background-color: rgba(245, 245, 245, 0.5);
+  border: 0;
+  margin: 0;
+  height: 16.956077630234934%;
+  position: relative;
+}
+#wellBorder {
+  width: 91.00160685591858%;
+  background-color: #e3e3e3;
+  height: 1px;
+  float: right;
+}
+/*Sidebar*/
+
+.sidebar_top {
+  border-right: 1px solid #e3e3e3;
+  background-color: rgba(245, 245, 245, 0.5);
+  width: 8.998393144081414%;
+  height: 86px;
+}
+
+.sidebar_bottom {
+  border-top: 0;
+  border-right: 1px solid #e3e3e3;
+  background-color: rgba(245, 245, 245, 0.5);
+  width: 8.998393144081414%;
+  height: 767px;
+}
+
+.list {
+  list-style-type: none;
+  color: white;
+  padding: 0;
+  margin: 5px;
+}
+.quote {
+  padding: 0;
+  display: block;
+}
+.holdings {
+  padding: 0;
+}
+/*Header Stock Info*/
+#percentChange {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 30px;
+}
+#dollarChange {
+  font-size: 18px;
+}
+.total_change #percentChange {
+  line-height: 15px
+}
+
+.day_change {
+  font-size: 12px;
+  color: white;
+  line-height: 20px;
+}
+.total_change {
+  font-size: 12px;
+  line-height: 15px;
+  color: white;
+}
+.links {
+  font-size: 12px;
+  line-height: 8px;
+  display: block;
+}
+.positive {
+  color: #7FFF00;
+}
+.negative {
+  color: red;
+}
+.no_change {
+  color: black;
+}
+.button img {
+  width: 128px;
+  height: 128px;
+}
+#quicklinks {
+  margin: 0;
+  padding: 0;
+}
+/*Loan Box*/
+.loans_list {
+  width: 40%;
+  height: 76%;
+  border: 1px solid #e3e3e3;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 0;
+  background-color: rgba(71, 120, 178, 0.5);
+  float: right;
+  text-align: center;
+}
+.loans_info {
+  width: 51%;
+  height: 76%;/*
+  margin-left: 8.998393144081414%;*/
+  background-color: rgba(71, 120, 178, 0.5);
+  float: left;
+  text-align: center;
+  padding: 12px;
+  transition: transform 500ms linear;
+}
+.loans_info .slashu {
+  font-size: 18px;
+}
+.loans_info .borrower {
+  text-align: left;
+
+}
+h1, h2, h3, h4 {
+  color: white;
+  margin: 0;
+}
+/*This css overrides all for some reason*/
+.loans_list p, .loans_info p {
+  padding: 0;
+  text-align: left;
+  font-size: 25px;
+  margin: 0;
+}
+.table {
+  color: #E8E8E8 !important;
+}
+.table th {
+  text-align: center;
+}
+.table td {
+  text-align: center;
+}
+.good {
+  background-color: #70F250;
+}
+.bad {
+  background-color: #F25050;
+}
+.value {
+  color: #E8E8E8;
+  font-weight: 700;
+}
+.loan_text {
+  font-size: 16px;
+  color: #E8E8E8;
+  font-weight: 400;
+}
+.actions {
+  font-style: italic;
+  text-align: right;
+}
+.loans_header {
+  opacity: .5;
+}
+.loans_header_text_good {
+  color: #525252;
+}
+.loans_header_text_good:hover {
+  color: #525252;
+  opacity: .7;
+}
+.loans_header_text_bad {
+  color: #202020;
+}
+.loans_header_text_bad:hover {
+  color: #202020;
+  opacity: .7;
+}
+/*Forms*/
+label {
+  color: #E8E8E8;
+}
+/*Responsive Google Calendar, http://answers.squarespace.com/questions/50460/how-to-embed-a-google-calendar-in-a-responsive-way

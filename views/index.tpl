@@ -7,10 +7,10 @@
         <meta name="author" content="Cody Morton">
         <meta name="robots" content="noindex, nofollow">
         <!-- CSS -->
-        <link href="http://catsarecrits.com/hub1/assets/css/animate.css" rel="stylesheet">
-        <link href="http://catsarecrits.com/hub1/assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="http://catsarecrits.com/hub1/assets/css/flat-ui-pro.min.css" rel="stylesheet">
-        <link href="http://catsarecrits.com/hub1/assets/css/style.css" rel="stylesheet">
+        <link href="/static/animate.css" rel="stylesheet">
+        <link href="/static/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/flat-ui-pro.min.css" rel="stylesheet">
+        <link href="/static/style.css" rel="stylesheet">
         <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     </head>
     <body>
@@ -30,7 +30,7 @@
                     <div class="well">
                         <div class="row text-center">
                             <!-- You can links here like this..
-                            <div class="col-lg-2"><a class="button" href="http://www.twitter.com"><img src="http://catsarecrits.com/hub1/assets/img/thumbs/twitter.png"></a></div> -->
+                            <div class="col-lg-2"><a class="button" href="http://www.twitter.com"><img src="/static/twitter.png"></a></div> -->
 
                         </div>
                     </div>
@@ -67,9 +67,9 @@
             </span>
         </body>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="http://catsarecrits.com/hub1/assets/js/bootstrap.min.js"></script>
+        <script src="/static/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-        <script src="http://catsarecrits.com/hub1/assets/js/js.js"></script>
+        <script src="/static/js.js"></script>
 <script>
 $(function() {
       $("#add_loan").click( function()
