@@ -14,7 +14,6 @@ Whenever I make a post on /r/borrow it will be in a decently usable state. Keep 
 # Features to Come
 * Edit loans (easily)
 * Search loans
-* Make dates stored as objects and not text, makes for a way better use of dates.
 * Make a not extremely terrible frontend. The current one looks pretty great but in reality, it's terrible.
 * Add payments to loans
 * Stats page (amount of interest made, amount of lenders, amount overdue, amount due, etc etc)
