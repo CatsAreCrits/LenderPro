@@ -112,9 +112,3 @@ class LoanTracker:
 l = LoanTracker()
 l.getTypes()
 l.getPayments()
-loan_payments = l.getLoanPayments(1)
-payment_list = []
-for item in loan_payments:
-	payment_list.append(item)
-print payment_list
-print l.getLoanPayments(1)

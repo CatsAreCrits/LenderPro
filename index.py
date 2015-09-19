@@ -156,10 +156,47 @@ def enterLoan():
 	conn.close()
 	return template("<p>Data entered successfully:{{id}} {{form_borrower}}, {{form_given}}, {{form_interest}}, {{form_repay_date}}, {{form_repaid}}, {{form_unpaid}}, {{form_original_thread}}, {{form_given_date}}, {{form_paidback_date}}, {{form_info}}</p>",id = id, form_borrower = form_borrower, form_given = form_given, form_interest = form_interest, form_repay_date = form_repay_date, form_repaid = form_repaid, form_unpaid = form_unpaid, form_original_thread = form_original_thread, form_given_date = form_given_date, form_paidback_date = form_paidback_date, form_info = form_info)
 
-@route('/edit')
-def edit():
+@route('/loans/edit/<id:int>')
+def editForm(id):
+	loan_data = {
+		'id': l.getLoansID(int(id))[0],
+		'borrower': l.getLoansID(int(id))[1],
+		'given': l.getLoansID(int(id))[2],
+		'interest': l.getLoansID(int(id))[3],
+		'agreed_repay_date': l.getLoansID(int(id))[4],
+		'repaid': l.getLoansID(int(id))[5],
+		'unpaid': l.getLoansID(int(id))[6],
+		'original_thread': l.getLoansID(int(id))[7],
+		'given_date': l.getLoansID(int(id))[8],
+		'paidback_date': l.getLoansID(int(id))[9],
+		'info': l.getLoansID(int(id))[10],
+		'status': l.getLoansID(int(id))[11],
+		}
+	return template('loan_edit', **loan_data)
+
+@route('/loans/edit/<id:int>', method='POST')
+def edit(id):
+	edit_borrower = request.forms.get('borrower')
+	edit_given = request.forms.get('given')
+	edit_interest = request.forms.get('interest')
+	edit_repay_date = request.forms.get('repay_date')
+	edit_repaid = request.forms.get('repaid')
+	edit_unpaid = request.forms.get('unpaid')
+	edit_original_thread = request.forms.get('original_thread')
+	edit_given_date = request.forms.get('given_date')
+	edit_paidback_date = request.forms.get('paidback_date')
+	edit_info = request.forms.get('info')
 	edit_status = request.forms.get('status')
-	pass
+	id = id
+	# SQLLite
+	conn = lite.connect('db.db')
+	c = conn.cursor()
+
+	formedit = [edit_borrower, edit_given, edit_interest, edit_repay_date, edit_repaid, edit_unpaid, edit_original_thread, edit_given_date, edit_paidback_date, edit_info, edit_status, id]
+
+	c.execute('UPDATE Loans SET borrower = ?, given = ?, interest = ?, agreed_repay_date = ?, repaid = ?, unpaid = ?, original_thread = ?, given_date = ?, paidback_date = ?, info = ?, status = ? WHERE id = ?', formedit)
+	conn.commit()
+	conn.close()
 
 # Route to get all loans from borrower
 @route('/loans/id/<id>')
