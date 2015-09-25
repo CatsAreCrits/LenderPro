@@ -213,4 +213,7 @@ h1, h2, h3, h4 {
 label {
   color: #E8E8E8;
 }
+.current {
+  background-color: #525252;
+}
 /*Responsive Google Calendar, http://answers.squarespace.com/questions/50460/how-to-embed-a-google-calendar-in-a-responsive-way
