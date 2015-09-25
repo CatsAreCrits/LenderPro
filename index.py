@@ -56,13 +56,18 @@ class LoanTracker:
 			# Types is globally the list of ALL TYPES
 			types = rows
 
-	def nextID(self):
+	def nextID(self, type="Loans"):
 		self.getLoans()
-		global ids
+		self.getPayments() 
 		ids = []
-		for loan in loans:
-			ids.append(loan[0])
-		return max(ids) + 1
+		if type == "Loans":
+			for loan in loans:
+				ids.append(loan[0])
+			return max(ids) + 1
+		elif type == "Payments":
+			for payment in payments:
+				ids.append(payment[0])
+			return max(ids) + 1
 
 	# Gets ALL open or closed loans.
 	# Example: l.getStatus(status="closed") = all closed loans, l.getStatus() = all open loans
@@ -71,9 +76,9 @@ class LoanTracker:
 		open = []
 		closed = []
 		for loan in loans:
-			if loan[11] == "open":
+			if loan[12] == "open":
 				open.append(loan[0])
-			elif loan[11] == "closed":
+			elif loan[12] == "closed":
 				closed.append(loan[0])
 		if status == "open":
 			if open == []:
@@ -114,6 +119,24 @@ class LoanTracker:
 			if payment[1] == id:
 				pl.append(payment)
 		return pl
+
+	# Gets all loan payments and calculates balance
+	def makeLoanBalance(self, id):
+		self.getLoans()
+		self.getPayments()
+		# Payment List for Amounts
+		pla = []
+		for payment in payments:
+			if payment[1] == id:
+				pla.append(payment[2])
+		balance = sum(pla)
+		a = [balance, id]
+		# SQLLite
+		conn = lite.connect('db.db')
+		c = conn.cursor()
+		c.execute('UPDATE Loans SET balance = ? WHERE id = ?', a)
+		conn.commit()
+		conn.close()
 
 l = LoanTracker()
 
@@ -159,18 +182,19 @@ def enterLoan():
 @route('/loans/edit/<id:int>')
 def editForm(id):
 	loan_data = {
-		'id': l.getLoansID(int(id))[0],
-		'borrower': l.getLoansID(int(id))[1],
-		'given': l.getLoansID(int(id))[2],
-		'interest': l.getLoansID(int(id))[3],
-		'agreed_repay_date': l.getLoansID(int(id))[4],
-		'repaid': l.getLoansID(int(id))[5],
-		'unpaid': l.getLoansID(int(id))[6],
-		'original_thread': l.getLoansID(int(id))[7],
-		'given_date': l.getLoansID(int(id))[8],
-		'paidback_date': l.getLoansID(int(id))[9],
-		'info': l.getLoansID(int(id))[10],
-		'status': l.getLoansID(int(id))[11],
+		'id': l.getLoansID(id)[0],
+		'borrower': l.getLoansID(id)[1],
+		'given': l.getLoansID(id)[3],
+		'interest': l.getLoansID(id)[4],
+		'agreed_repay_date': l.getLoansID(id)[5],
+		'repaid': l.getLoansID(id)[6],
+		'unpaid': l.getLoansID(id)[7],
+		'original_thread': l.getLoansID(id)[8],
+		'given_date': l.getLoansID(id)[9],
+		'paidback_date': l.getLoansID(id)[10],
+		'info': l.getLoansID(id)[11],
+		'status': l.getLoansID(id)[12],
+		
 		}
 	return template('loan_edit', **loan_data)
 
@@ -197,31 +221,32 @@ def edit(id):
 	c.execute('UPDATE Loans SET borrower = ?, given = ?, interest = ?, agreed_repay_date = ?, repaid = ?, unpaid = ?, original_thread = ?, given_date = ?, paidback_date = ?, info = ?, status = ? WHERE id = ?', formedit)
 	conn.commit()
 	conn.close()
+	return template("<meta http-equiv='refresh' content='0';URL='/'/>")
 
 # Route to get all loans from borrower
-@route('/loans/id/<id>')
+@route('/loans/id/<id:int>')
 def viewLoan(id):
-	# We use (int(id)) because it doesn't know it's an int, it thinks it's a string. So it won't work without making it an int.
-	if l.getLoansID(int(id))[11] == "open":
+	if l.getLoansID(id)[12] == "open":
 		statusId = "open"
 		color = "bad"
-	elif l.getLoansID(int(id))[11] == "closed":
+	elif l.getLoansID(id)[12] == "closed":
 		statusId = "closed"
 		color = "good"
 
 	loan_data = {
-		'id': l.getLoansID(int(id))[0],
-		'borrower': l.getLoansID(int(id))[1],
-		'given': l.getLoansID(int(id))[2],
-		'interest': l.getLoansID(int(id))[3],
-		'agreed_repay_date': l.getLoansID(int(id))[4],
-		'repaid': l.getLoansID(int(id))[5],
-		'unpaid': l.getLoansID(int(id))[6],
-		'original_thread': l.getLoansID(int(id))[7],
-		'given_date': l.getLoansID(int(id))[8],
-		'paidback_date': l.getLoansID(int(id))[9],
-		'info': l.getLoansID(int(id))[10],
-		'status': l.getLoansID(int(id))[11],
+		'id': l.getLoansID(id)[0],
+		'borrower': l.getLoansID(id)[1],
+		'balance':l.getLoansID(id)[2],
+		'given': l.getLoansID(id)[3],
+		'interest': l.getLoansID(id)[4],
+		'agreed_repay_date': l.getLoansID(id)[5],
+		'repaid': l.getLoansID(id)[6],
+		'unpaid': l.getLoansID(id)[7],
+		'original_thread': l.getLoansID(id)[8],
+		'given_date': l.getLoansID(id)[9],
+		'paidback_date': l.getLoansID(id)[10],
+		'info': l.getLoansID(id)[11],
+		'status': l.getLoansID(id)[12],
 		'color': color
 		}
 	return template('loan_info', **loan_data)
@@ -248,10 +273,36 @@ def viewLoansbyBorrower(borrower):
 	}
 	return template('loan_borrower', **borrower_data)
 
-@route('/loans/payments/<id>')
+@route('/loans/payments/<id:int>/add')
+def addPaymentForm(id):
+	LoanInfo = {
+	'id': l.getLoansID(id)[0]
+	}
+	return template('loan_payments_add', **LoanInfo)
+
+@route('/loans/payments/<id:int>/add', method='POST')
+def addPayment(id):
+	form_amount = request.forms.get('amount')
+	form_ptype = request.forms.get('ptype')
+	form_date = request.forms.get('date')
+	form_transID = request.forms.get('transactionID')
+	pID = l.nextID(type="Payments")
+	# SQLLite
+	conn = lite.connect('db.db')
+	c = conn.cursor()
+
+	formpayments = [pID, id, form_amount, form_ptype, form_date, form_transID]
+
+	c.execute('INSERT INTO Payments VALUES(?, ?, ?, ?, ?, ?)', formpayments)
+
+	conn.commit()
+	conn.close()
+	l.makeLoanBalance(id)
+
+@route('/loans/payments/<id:int>')
 def viewPaymentsbyLoanID(id):
 	payment_data = {
-	'payment_data': l.getLoanPayments(int(id))
+	'payment_data': l.getLoanPayments(id)
 	}
 	return template('loan_payments', **payment_data)
 

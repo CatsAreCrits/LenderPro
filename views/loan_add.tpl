@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="inputBorrower" class="col-sm-2 control-label">Borrower</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="Borrower" name="borrower">
+                <input type="text" class="form-control" id="inputBorrower" placeholder="Borrower" name="borrower">
             </div>
         </div>
         <div class="form-group">

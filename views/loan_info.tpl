@@ -10,7 +10,7 @@
     <hr>
     <div class="row">
         <div class="col-lg-6">
-            <p class="loan_balance value"><span class="loan_text">Balance: </span>N/A</p>
+            <p class="loan_balance value"><span class="loan_text">Balance: </span>{{balance}}</p>
             <p class="given value"><span class="loan_text">Given: </span>${{given}}</p>
             <p class="interest value"><span class="loan_text">Interest: </span>${{interest}}</p>
             <p class="repaid value"><span class="loan_text">Repaid: </span>${{repaid}}</p>

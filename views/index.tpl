@@ -41,7 +41,7 @@
             </div>
             <div class="loans_list">
                 <div class="row">
-                    <div class="col-lg-3"><h5><a id="add_loan" href="#">Add Loan</a></h5></div>
+                    <div class="col-lg-3"><h5><a id="" href="/loans">Add Loan</a></h5></div>
                     <div class="col-lg-6"><h3>Open Loans:</h3></div>
                     <div class="col-lg-3"><h4></h4></div>
                 </div>
@@ -70,15 +70,6 @@
         <script src="/static/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
         <script src="/static/js.js"></script>
-<script>
-$(function() {
-      $("#add_loan").click( function()
-           {
-             $( "#loan_info" ).load( "/loans");
-           }
-      );
-});
- </script>
         <script>$( "#status_open" ).load( "/loans/status/open" );</script>
         <script>$( "#status_closed" ).load( "/loans/status/closed" );</script>
     </html>

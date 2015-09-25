@@ -8,7 +8,7 @@
 %for item in status_loans_data:
 <tr>
 	<td>{{item[0]}}</td>
-	<td>${{item[2]}}</td>
+	<td>${{item[3]}}</td>
 	<td>/u/{{item[1]}}</td>
 	<td><a href="#" id="{{item[0]}}">View</a> / <a href="/loans/edit/{{item[0]}}" id="">Edit</a></td>
 </tr>

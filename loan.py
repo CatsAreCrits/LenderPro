@@ -49,13 +49,18 @@ class LoanTracker:
 			# Types is globally the list of ALL TYPES
 			types = rows
 
-	def nextID(self):
+	def nextID(self, type="Loans"):
 		self.getLoans()
-		global ids
+		self.getPayments() 
 		ids = []
-		for loan in loans:
-			ids.append(loan[0])
-		return max(ids) + 1
+		if type == "Loans":
+			for loan in loans:
+				ids.append(loan[0])
+			return max(ids) + 1
+		elif type == "Payments":
+			for payment in payments:
+				ids.append(payment[0])
+			return max(ids) + 1
 
 	# Gets ALL open or closed loans.
 	# Example: l.getStatus(status="closed") = all closed loans, l.getStatus() = all open loans
@@ -64,9 +69,9 @@ class LoanTracker:
 		open = []
 		closed = []
 		for loan in loans:
-			if loan[11] == "open":
+			if loan[12] == "open":
 				open.append(loan[0])
-			elif loan[11] == "closed":
+			elif loan[12] == "closed":
 				closed.append(loan[0])
 		if status == "open":
 			if open == []:
@@ -101,7 +106,6 @@ class LoanTracker:
 	def getLoanPayments(self, id):
 		self.getLoans()
 		self.getPayments()
-		self.getTypes()
 		# Payment List
 		pl = []
 		for payment in payments:
@@ -109,6 +113,27 @@ class LoanTracker:
 				pl.append(payment)
 		return pl
 
+	# Gets all loan payments and calculates balance
+	def makeLoanBalance(self, id):
+		self.getLoans()
+		self.getPayments()
+		# Payment List for Amounts
+		pla = []
+		for payment in payments:
+			if payment[1] == id:
+				pla.append(payment[2])
+		balance = sum(pla)
+		a = [balance, id]
+		# SQLLite
+		conn = lite.connect('db.db')
+		c = conn.cursor()
+		c.execute('UPDATE Loans SET balance = ? WHERE id = ?', a)
+		conn.commit()
+		conn.close()
+
+
 l = LoanTracker()
 l.getTypes()
 l.getPayments()
+
+l.makeLoanBalance(7)
