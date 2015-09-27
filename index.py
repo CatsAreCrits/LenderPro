@@ -223,6 +223,22 @@ def edit(id):
 	conn.close()
 	return template("<meta http-equiv='refresh' content='0';URL='/'/>")
 
+# Moves loan to trash. Deleted after 2 weeks.
+@route('/loans/id/<id:int>/trash')
+def trashLoanCheck(id):
+	id = [id]
+	return template('loan_trash', **id)
+
+@route('loans/id/<id:int>/trash', method='POST')
+def trashLoan(id):
+	trash_id = request.forms.get('id')
+	conn = lite.connect('db.db')
+	c = conn.cursor()
+	c.execute('INSERT INTO loan_trash SELECT * FROM loans WHERE id = ?', trash_id)
+	conn.commit()
+	conn.close
+	return template("Loan moved to trash successfully. <a href='/loans/trash'>Click here</a> to see trash.")
+
 # Route to get all loans from borrower
 @route('/loans/id/<id:int>')
 def viewLoan(id):

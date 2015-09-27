@@ -10,12 +10,11 @@ Whenever I make a post on /r/borrow it will be in a decently usable state. Keep 
 * All stored in a very simple SQLite database.
 * The data stored per loan: Loan ID, Borrower, amount given (initial payment), agreed interest, given data, repay date (added when they repay), unpaid? (if the loan is unpaid or overdue), original thread, info file/folder
 * The data stored per payment: Payment ID, Payment Type (examples: initial loan, full repayment, full repayment + interest, and interest), Amount, Date, Transaction ID (for paypal, will look into other payment types soon).
+* The data that is calculated per loan: Balance (This is basically all of the payment amounts added together. So if you lent $25 (-25) and got back $30 (30), your balance would be $5.), Days until agreed payback date, and more to come
 
 # Features to Come
-* Edit loans (easily)
 * Search loans
 * Make a not extremely terrible frontend. The current one looks pretty great but in reality, it's terrible.
-* Add payments to loans
 * Stats page (amount of interest made, amount of lenders, amount overdue, amount due, etc etc)
 * Make it easy for the average /r/borrow user to use
 * Much more..
